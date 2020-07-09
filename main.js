@@ -114,3 +114,82 @@
 // const teste = () => {return 'teste';} // [1,2,3,4] //NAO FUNCIONA { nome : 'Diego'} PQ ISSO É OBJETO, E AS CHAVES SAO O CORPO DA FUNÇÃO, TERIA QUE SER CHAVES DENTRO DE CHAVES OU PARENTESES ENVOLTA DAS CHAVES
 
 // console.log(teste());
+
+//Valores Padrão
+//dizer que dois valores estão definidos, e que dps estes valores podem ser substituídos individualmente
+//exemplo
+
+//NAO FUNCIONA
+// function soma(a,b){
+//     return a + b;
+// }
+
+// soma(1); //passar somente um valor ou nenhum, o sistema nao tem como fazer 
+// soma();
+
+//FUNCIONA
+
+// function soma(a = 3, b = 6){   //estes valores estão fixados ou PADRONIZADOS 
+//     return a + b;
+// }
+
+// console.log(soma(1)); //o 1 substitui o A
+// console.log(soma()); // a soma acontece com os valores que ja estão padronizados
+
+//OU EM FORMATO DE ARROW FUNCTION
+
+//const soma = (a = 3, b = 6) => a + b;
+
+//console.log(soma(1));
+//console.log(soma());
+
+//Desestruturação
+
+// const usuario = {
+//     nome: 'Diego',
+//     idade: 23,
+//     endereco:{
+//         cidade: 'Rio do Sul',
+//         estado: 'SC'
+//     }
+// };
+
+//Para acessar o USUARIO, o mais comum é fazer assim:
+
+// const nome = usuario.nome;
+// const idade = usuario.idade;
+// const cidade = usuario.endereco.cidade;
+
+// console.log(nome);
+// console.log(idade);
+// console.log(cidade);
+
+//MASSS há um jeito mais facil, pela desestruturação
+
+// const {nome, idade, endereco:{ cidade } } = usuario;
+
+// console.log(nome);
+// console.log(idade);
+// console.log(cidade);
+
+//OU por exemplo em uma função
+
+//utilizando o mesmo usuário e as informações
+
+// function mostranome(usuario){
+//     console.log(usuario.nome);
+// }
+
+// mostranome(usuario);
+
+// ao inves disso, pode se reduzir a isso
+
+// function mostranome({ nome, idade }){
+//     console.log(nome, idade);
+// }
+
+// mostranome(usuario);
+
+//REST/SPREAD
+
+//REST pega o resto das propriedades
