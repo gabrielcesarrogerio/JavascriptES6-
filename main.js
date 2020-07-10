@@ -193,3 +193,84 @@
 //REST/SPREAD
 
 //REST pega o resto das propriedades
+
+//em objetos
+// const usuario = {
+//     nome: 'Diego',
+//     idade: 23,
+//     empresa: 'Rocketseat'
+// };
+// const { nome, ...resto} = usuario;
+
+// console.log(nome);
+// console.log(resto);
+
+//em array
+// const arr = [1,2,3,4];
+
+// const [ a,b, ...c] = arr;
+
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+//ao invés de, cada vez que eu quiser colocar mais um elemento (o C,D,E) na soma eu tiver que colocar em todos os lugares
+
+// function soma(a,b){ //(a,b,c)(a,b,c,d)
+//     return a + b; //(a+b+c)(a+b+c+d)
+// }
+
+// console.log(soma(1,2)); //(1,2)(1,2,3)(1,2,3,4)
+
+//faz em forma de arrow function
+
+// function soma(...params){
+//     return params.reduce((total, next) => total + next);
+// }
+
+// console.log(soma(1,2,3,4,5,6,7,8,9))
+
+//SPREAD
+//faz o papel de repassar as informações de um array, por exemplo, pro outro. junta as informações
+
+// const arr1= [1,2,3];
+// const arr2= [4,5,6];
+// const arr3= [...arr1, ...arr2];
+// console.log(arr3);
+
+//ou
+
+//em objeto
+
+// const usuario1 = {
+//     nome:'Diego',
+//     idade:23,
+//     empresa:'Rocketseat'
+// } 
+
+// const usuario2 = {...usuario1, nome:'Gabriel' }; //esse ...usuario1 copiará o usuario, logo depois da virgula é possivel passar um parametro e altera-lo 
+
+// console.log(usuario2);
+
+//Template Literals
+//inserir variaveis dentro de strings
+
+// const nome = "diego";
+// const idade = 23;
+
+// console.log('Meu nome é ' + nome + ' e tenho ' + idade + ' anos');
+// //COMO SIMPLIFICAR
+// console.log(`Meu nome é ${nome} e tenho ${idade} anos`);
+
+//Object Short Sintax
+
+// const nome = "Diego";
+// const idade = 23;
+
+// const usuario = {
+//     nome,     //ao inves de nome: nome;
+//     idade,    //ao inves de idade: idade;  
+//     empresa:'Rocketseat'
+// };
+
+// console.log(usuario);
