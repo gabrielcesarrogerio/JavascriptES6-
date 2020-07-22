@@ -70,4 +70,54 @@
 // const promise = () => new Promise(resolve, reject => resolve);
 // console.log(promise);
 //EXERCÍCIO 4
+//4.1
+// const empresa = {
+//     nome: 'Rocketseat',
+//     endereco: {
+//         cidade: 'Rio do sul',
+//         estado: 'SC',
+//     }
+// }
+// const {nome, endereco:{cidade, estado}} = empresa;
+// console.log(nome);
+// console.log(cidade);
+// console.log(estado);
+//4.2
+// function mostrainfo({nome, idade}){
+//     return `${nome} tem ${idade} anos.`;
+// }
+// console.log(mostrainfo({ nome: 'Diego', idade: 23}));
+//EXERCÍCIO 5
+//5.1
+// const arr = [1,2,3,4,5,6];
+// const [x, ...y] = arr;
+// console.log(x);
+// console.log(y);
+//5.2
+// const usuario = {
+//     nome: 'Diego',
+//     idade: 23,
+//     endereco: {
+//         cidade: 'Rio do Sul',
+//         uf: 'SC',
+//         pais: 'Brasil',
+//     }
+// };
+// const usuario2 = {...usuario, nome : 'Gabriel'};
+// const usuario3 = {...usuario, endereco:{cidade: 'Lontras', uf:'SC', pais: 'Brasil'}};
+// console.log(usuario2);
+// console.log(usuario3);
+//EXERCÍCIO 6
+// const usuario = 'Diego';
+// const idade = 23;
+// console.log(`O usuario ${usuario} possui ${idade} anos`);
+//EXERCÍCIO 7
+// const nome = 'Diego';
+// const idade = 23;
+// const usuario = {
+//     nome,
+//     idade,
+//     cidade: 'Rio do Sul',
+// };
+// console.log(usuario);
 "use strict";
