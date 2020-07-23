@@ -274,3 +274,210 @@
 // };
 
 // console.log(usuario);
+
+//WEBPACK MODULE 
+
+// import * as funcoes from '../funcoes';
+// import soma, {  sub } from './funcoes';
+// import soma from './soma';
+
+// console.log(funcoes.soma(1, 2));
+// console.log(funcoes.sub(4, 2))
+
+//DESAFIO WEBPACK SERVER
+
+// import classeusuario, {idade as idadeusuario} from './functions';
+
+// console.log(classeusuario.info());
+// console.log(idadeusuario);
+
+
+//ASYNC AWAIT
+
+// const minhapromise = () => new Promise((resolve, reject) => {
+//     setTimeout (() => {resolve('ok')}, 2000);
+// })
+
+//forma antiga
+// minhapromise()
+//     .then(response => {
+//     console.log(response);
+// })
+//     .catch(err => {
+//         console.log(err);
+//     })
+
+//forma a partir do ES8
+
+//sem arrow function
+// async function executapromise(){
+//     console.log(await minhapromise()); //executa primeiro em 2000 ms
+//     console.log(await minhapromise()); //executa em 2000 ms tb porem apos ter executado a primera
+//     console.log(await minhapromise()); //executa em 2000 ms tb porem apos ter executado a segunda
+    
+// }
+
+//com arrow function
+
+// const executapromise = async() => {
+//     console.log(await minhapromise());
+//     console.log(await minhapromise());
+//     console.log(await minhapromise());
+// }
+// executapromise();
+
+//CONFIGURANDO AXIOS
+
+// import axios from 'axios';
+
+// class api{
+//     static async getuserinfo(username) {
+//         try {
+//         const response = await axios.get(`https://api.github.com/users/${username}`)
+//         console.log(response);
+//     } catch (err){
+//         console.log('Erro na API');
+//     }
+//     }
+// }
+
+// api.getuserinfo('gabrielcesarrogerio')
+
+//DESAFIO ASYNC/AWAIT
+
+//1
+// const delay = () => new Promise(resolve => setTimeout(resolve, 1000));
+
+// const umporsegundo = async() => {
+//     console.log(await delay(console.log('1s')));
+//     console.log(await delay(console.log('2s')));
+//     console.log(await delay(console.log('3s')));
+// }
+
+// umporsegundo();
+
+//2
+// import axios from 'axios';
+
+// class api{
+//     static async getuserfromgithub(user){
+//         try{
+//             const response = await axios.get(`https://api.github.com/users/${user}`)
+//             console.log(response);
+//         }catch(err) {
+//             console.log('usuario nao existe');
+//         }
+//     }
+// }
+
+// api.getuserfromgithub('gabrielcesarrogerio');
+// api.getuserfromgithub('marmitamarmitamarmita');
+
+//3
+// import axios from 'axios';
+
+// class github{
+//     static async getrepo(repo){
+//         try{
+//             const response = await axios.get(`https://api.github.com/repos/${repo}`)
+//             console.log(response);
+//         }catch(err){
+//             console.log('Repositorio inexistente');
+//         }
+//     }
+// }
+
+// github.getrepo('gabrielcesarrogerio/ecoletaexperience');
+// github.getrepo('rocketseat/ikudufd');
+
+//4
+// import axios from 'axios';
+
+// class usuario{
+//     static async buscausuario(user){
+//         try{
+//             const response = await axios.get(`https://api.github.com/users/${user}`)
+//             console.log(response.data);
+//         }catch(err){
+//             console.log('Usuario inexistente');
+//         }
+//     }
+// }
+
+// usuario.buscausuario('diego3g');
+
+//APLICAÇÃO ES6+
+
+import api from './api';
+
+class app {
+    constructor(){
+        this.repositories = [];
+        this.formEl = document.getElementById('repo-form');
+        this.inputEl = document.querySelector('input[name=repository]');
+        this.listEl = document.getElementById('repo-list');
+        this.registerhandlers();
+    }
+    registerhandlers(){
+        this.formEl.onsubmit = (event) => this.addrepository(event);
+     }
+     setloading(loading = true){
+         if(loading === true){
+             let loadingEL = document.createElement('span');
+             loadingEL.appendChild(document.createTextNode('Carregando'));
+             loadingEL.setAttribute('id', 'loading');
+             this.formEl.appendChild(loadingEL);
+         }else {
+             document.getElementById('loading').remove();
+         }
+     }
+    async addrepository(event){
+        event.preventDefault();
+        const repoinput = this.inputEl.value;
+        if(repoinput.lenght === 0)
+        return;
+        this.setloading();
+        try{
+            const response = await api.get(`/repos/${repoinput}`);
+            const { name, description, html_url, owner:{avatar_url}} = response.data;
+            this.repositories.push({
+                name,
+                description,
+                avatar_url,
+                html_url,
+            });
+            this.inputEl.value = '';
+            this.render();
+        }catch (err){
+            alert('Repositorio inexistente');
+            this.inputEl.value = '';
+        }
+        this.setloading(false);
+    }
+    
+        render() {
+            this.listEl.innerHTML = '';
+            this.repositories.forEach(repo => {
+                let imgEl = document.createElement('img');
+                imgEl.setAttribute('src', repo.avatar_url);
+                let titleEl = document.createElement('strong');
+                titleEl.appendChild(document.createTextNode(repo.name));
+                let descriptionEl = document.createElement('p');
+                descriptionEl.appendChild(document.createTextNode(repo.description));
+                let linkEl= document.createElement('a');
+                linkEl.setAttribute('target', '_blank');
+                linkEl.setAttribute('href', repo.html_url)
+                linkEl.appendChild(document.createTextNode('acessar'));
+                let listitemEl = document.createElement('li');
+                listitemEl.appendChild(imgEl);
+                listitemEl.appendChild(titleEl);
+                listitemEl.appendChild(descriptionEl);
+                listitemEl.appendChild(linkEl);
+
+                this.listEl.appendChild(listitemEl);
+
+            })
+        }
+    }
+
+new app();
